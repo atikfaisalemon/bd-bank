@@ -42,7 +42,7 @@
         <div class="col-md-4">
           <div class="Balance status">
             <h5>Balance</h5>
-            <h2>1600$</h2>
+            <h2>$ <span id="currentBalance">1200</span></h2>
           </div>
         </div>
       </div>
@@ -66,10 +66,11 @@
             <input
               type="text"
               class="form-control"
+              id="withdrawAmount"
               placeholder="$ amount want to withdraw"
             />
             <br />
-            <button class="btn btn-success">Withdraw</button>
+            <button id="add-Withdraw" class="btn btn-success">Withdraw</button>
           </div>
         </div>
       </div>
@@ -88,16 +89,43 @@
 
       const depositButton = document.getElementById("add-Deposit");
       depositButton.addEventListener("click", function () {
-        const depositAmount = document.getElementById("deposit-Amount").value;
-        const amountNumber = parseFloat(depositAmount);
+      const amountNumber = getInput("deposit-Amount");
 
-        const currentAmonut = document.getElementById("curretDeposit-Amount").innerText;
+        updateSpantag("curretDeposit-Amount", amountNumber);
+        updateSpantag("currentBalance", amountNumber);
+
+        document.getElementById("deposit-Amount").value = "";
+      });
+      //withdraw even Handler
+      const withdrawButton = document.getElementById("add-Withdraw");
+      withdrawButton.addEventListener("click", function () {
+        const withdrawAmonut = getInput("withdrawAmount");
+
+        updateSpantag("curretWitdraw-Amount", withdrawAmonut);
+        updateWithdrawSpantag("currentBalance", withdrawAmonut)
+
+        
+        document.getElementById("withdrawAmount").value = "";
+      });
+
+        function getInput(id) {
+        const amount = document.getElementById(id).value;
+        const number = parseFloat(amount);
+        return number;
+      }
+
+      function updateWithdrawSpantag(id,withdrawAmonut){
+        const currentBalance = document.getElementById(id).innerText;
+        const currentAmount = parseFloat(currentBalance) - withdrawAmonut;
+        document.getElementById(id).innerHTML = currentAmount;
+      }
+
+      function updateSpantag(id, amountNumber) {
+        const currentAmonut = document.getElementById(id).innerText;
         const currentNumber = parseFloat(currentAmonut);
         const totalAmount = currentNumber + amountNumber;
-        document.getElementById("curretDeposit-Amount").innerText = totalAmount;
-        document.getElementById("deposit-Amount").value = "";
-
-      });
+        document.getElementById(id).innerText = totalAmount;
+      }
     </script>
   </body>
 </html>
