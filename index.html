@@ -102,9 +102,8 @@
         const withdrawAmonut = getInput("withdrawAmount");
 
         updateSpantag("curretWitdraw-Amount", withdrawAmonut);
-        updateWithdrawSpantag("currentBalance", withdrawAmonut)
+        updateSpantag("currentBalance", -1*withdrawAmonut)
 
-        
         document.getElementById("withdrawAmount").value = "";
       });
 
@@ -114,11 +113,11 @@
         return number;
       }
 
-      function updateWithdrawSpantag(id,withdrawAmonut){
-        const currentBalance = document.getElementById(id).innerText;
-        const currentAmount = parseFloat(currentBalance) - withdrawAmonut;
-        document.getElementById(id).innerHTML = currentAmount;
-      }
+      // function updateWithdrawSpantag(id,withdrawAmonut){
+      //   const currentBalance = document.getElementById(id).innerText;
+      //   const currentAmount = parseFloat(currentBalance) - withdrawAmonut;
+      //   document.getElementById(id).innerHTML = currentAmount;
+      // }
 
       function updateSpantag(id, amountNumber) {
         const currentAmonut = document.getElementById(id).innerText;
